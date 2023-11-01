@@ -1,2 +1,0 @@
-# gameplan
-project app
