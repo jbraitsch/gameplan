@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Game Plan</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+    .dark-mode {
+      background-color: black;
+      color: white;
+    }
+    </style>
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+</head>
+
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light lead">
+<a href={%url 'index'%}>
+    <img border="0" alt="GAME PLAN" src="{% static 'images/gp_logo.png' %}">
+</a>
+<div class="container-fluid">
+<button onclick="dark()">Toggle dark mode</button>
+
+<script>
+function dark() {
+   var element = document.body;
+   element.classList.toggle("dark-mode");
+}
+</script>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span></button>
+<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+<div class="navbar-nav">
+<a class="nav-link" href="{% url 'index' %}">Home</a>
+<a class="nav-link" href="{% url 'create_business'%}">Create New Business</a>
+
+{% comment "" %}<a class="nav-link" href="{% url 'customer' %}">Customers</a>{% endcomment %}
+</div>
+</div>
+</div>
+</nav>
+
+
+<!-- add block content from html template -->
+{% block content %}
+
+
+{% endblock %}
+</body>
+</html>
