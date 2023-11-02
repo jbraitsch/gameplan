@@ -10,7 +10,12 @@
       background-color: black;
       color: white;
     }
-    </style>
+
+    logo{
+        width: 200;
+        height: 100;
+    }
+</style>
 {% load bootstrap5 %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
@@ -19,11 +24,13 @@
 
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light lead">
-<a href={%url 'index'%}>
-    <img border="0" alt="GAME PLAN" src="{% static 'images/gp_logo.png' %}">
-</a>
+    <div class = "container-fluid">
+        <a href={%url 'index'%}>
+            <img border="0" alt="GAME PLAN" src="{% static 'images/gp_logo.png' %}">
+        </a>
+    </div>
 <div class="container-fluid">
-<button onclick="dark()">Toggle dark mode</button>
+<button onclick="dark()"><img border="0" alt="Toggle Dark Mode" src="{% static 'images/dark.jpg' %}"></button>
 
 <script>
 function dark() {
