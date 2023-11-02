@@ -9,6 +9,7 @@ from django.contrib import messages
 def indexCity(request, city):
     businesses_in_city = Business.objects.filter(city = city)
     context = {'businesses_in_city':businesses_in_city}
+    context["city"] = city
     print("Businesses near you", businesses_in_city)
     return render( request, 'gp_app/index_city.html', context)
 
@@ -16,6 +17,9 @@ def index(request):
     #all_cities = City.objects.filter()
     CITIES = (' ','Colorado Springs','Denver', 'Fort Collins')
     return render(request, 'gp_app/index.html', {'cities': CITIES})
+
+class BusinessListView(generic.ListView):
+    model = Business
 
 class BusinessDetailView(generic.DetailView):
     model = Business

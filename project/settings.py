@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'gp_app',
     'bootstrap5'
+    'accessibility',
 ]
 
 # Add support for authenticating users

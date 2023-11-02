@@ -4,17 +4,20 @@
 
 <!-- Replace block content in base_template.html -->
 {% block content %}
-<h1>GaME PLaN</h1>
 
-<h2>List of Businesses</h2>
+<h2>Businesses in {{city}} area</h2>
 <ul class="list-group">
 {% for i in businesses_in_city %}
 <li class="list-group-item">
 <p><strong>{{ i.name }}</strong></p>
-<p>{{i.city}}
-    <a class="btn btn-primary" href="{{ i.get_absolute_url }}" role="button">View</a>
+<p><strong>Currently:</strong>
+    {%if i.is_open %}
+     Open
+    {%else%}
+     Closed
+    {% endif %}
 </p>
-<p>Open: {{i.is_open}}</p>
+<a class="btn btn-primary" href="{{ i.get_absolute_url }}" role="button">View</a>
 </li>
 {% endfor %}
 </ul>

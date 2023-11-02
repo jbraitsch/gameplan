@@ -7,9 +7,89 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <style>
     .dark-mode {
-      background-color: black;
+      background-color: #222;
       color: white;
     }
+
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 30%;
+    }
+
+    /* Navbar container */
+    .navbar {
+    overflow: hidden;
+    background-color: #333;
+    font-family: Arial;
+     }
+  
+  /* Links inside the navbar */
+  .navbar a {
+    float: left;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  /* The dropdown container */
+  .dropdown {
+    float: left;
+    overflow: hidden;
+  }
+  
+  /* Dropdown button */
+  .dropdown .dropbtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit; /* Important for vertical align on mobile phones */
+    margin: 0; /* Important for vertical align on mobile phones */
+  }
+  
+  /* Add a red background color to navbar links on hover */
+  .navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: grey;
+  }
+  
+  /* Dropdown content (hidden by default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  /* Add a grey background color to dropdown links on hover */
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  access{
+    float: right;
+  }
 </style>
 {% load bootstrap5 %}
 {% bootstrap_css %}
@@ -18,34 +98,37 @@
 
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light lead">
-    <div class = "container-fluid">
-        <a href={%url 'index'%}>
-            <img border="0" alt="GAME PLAN" src="{% static 'images/gp_logo.png' %}">
-        </a>
-    </div>
-<div class="container-fluid">
-<button onclick="dark()"><img border="0" alt="Toggle Dark Mode" src="{% static 'images/dark.jpg' %}"></button>
-
 <script>
-function dark() {
-   var element = document.body;
-   element.classList.toggle("dark-mode");
-}
+    function dark() {
+        var element = document.body;
+        element.classList.toggle("dark-mode")
+    }
 </script>
-<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
-aria-expanded="false" aria-label="Toggle navigation">
-<span class="navbar-toggler-icon"></span></button>
-<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-<div class="navbar-nav">
-<a class="nav-link" href="{% url 'index' %}">Home</a>
-<a class="nav-link" href="{% url 'create_business'%}">Create New Business</a>
+<a href={%url 'index'%}>
+    <img class="img" border="0" alt="GAME PLAN" src="{% static 'images/gp_logo.png' %}">
+</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-#333">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">Locations</button>
+                <ul class="dropdown-menu">
+                  <li><a href="{%url 'index_city' "Colorado Springs"%}">Colorado Springs</a></li>
+                  <li><a href="{%url 'index_city' "Denver"%}">Denver</a></li>
+                  <li><a href="{%url 'index_city' "Fort Collins"%}">Fort Collins</a></li>
+                </ul>
+              </div>
 
-{% comment "" %}<a class="nav-link" href="{% url 'customer' %}">Customers</a>{% endcomment %}
-</div>
-</div>
-</div>
+            <a class="nav-link" href="{% url 'business' %}">Businesses</a>
+            <a class="nav-link" href="{% url 'create_business'%}">Create New Business</a>
+            <button class="access" onclick="dark()"><img border="0" alt="Toggle Dark Mode" src="{% static 'images/dark.jpg' %}"></button>
+            {% comment "" %}<a class="nav-link" href="{% url 'customer' %}">Customers</a>{% endcomment %}
+        </div>
+    </div>
 </nav>
 
 

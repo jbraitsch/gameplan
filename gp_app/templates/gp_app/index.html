@@ -7,8 +7,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <style>
     .dark-mode {
-      background-color: black;
+      background-color: #222;
       color: white;
+    }
+
+    img {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 40%;
+    }
+
+    .center {
+      text-align:center;
     }
 </style>
 {% load bootstrap5 %}
@@ -25,15 +36,12 @@
     }
   </script>
   <p>
-    <img border="0" alt="GAME PLAN" src="{% static 'images/gp_logo.png' %}">
+    <img class="img" border="0" alt="GAME PLAN" src="{% static 'images/gp_logo.png' %}">
   </p>
-  <label>Choose Your Location<label>
+  <label class="center">Choose Your Location<label>
     <select id="menu" name="links" size="1" onchange="window.location.href=this.value;">
       {% for city in cities %}
-          <option value="{%url 'index-city' city %}">{{city}}</option>
-        {% endfor %}
-    </select>
-    <select id="the-id">
-        
+          <option value="{%url 'index_city' city %}">{{city}}</option>
+      {% endfor %}
     </select>
 </body>
