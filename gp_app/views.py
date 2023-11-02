@@ -6,10 +6,16 @@ from .forms import BusinessForm
 from django.contrib import messages
 
 # Create your views here.
-def index(request):
-    businesses_in_city = Business.objects.all()
+def indexCity(request, city):
+    businesses_in_city = Business.objects.filter(city = city)
+    context = {'businesses_in_city':businesses_in_city}
     print("Businesses near you", businesses_in_city)
-    return render( request, 'gp_app/index.html', {'businesses_in_city':businesses_in_city})
+    return render( request, 'gp_app/index_city.html', context)
+
+def index(request):
+    #all_cities = City.objects.filter()
+    CITIES = (' ','Colorado Springs','Denver', 'Fort Collins')
+    return render(request, 'gp_app/index.html', {'cities': CITIES})
 
 class BusinessDetailView(generic.DetailView):
     model = Business

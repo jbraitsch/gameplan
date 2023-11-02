@@ -1,22 +1,39 @@
-<!-- inherit from base.html -->
-{% extends 'gp_app/base_template.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Game Plan</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+    .dark-mode {
+      background-color: black;
+      color: white;
+    }
+</style>
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+</head>
 
-
-<!-- Replace block content in base_template.html -->
-{% block content %}
-<h1>GaME PLaN</h1>
-
-<h2>List of Businesses</h2>
-<ul class="list-group">
-{% for i in businesses_in_city %}
-<li class="list-group-item">
-<p><strong>{{ i.name }}</strong></p>
-<p>{{i.city}}
-    <a class="btn btn-primary" href="{{ i.get_absolute_url }}" role="button">View</a>
-</p>
-<p>Open: {{i.is_open}}</p>
-</li>
-{% endfor %}
-</ul>
-
-{% endblock %}
+<body>
+  <button onclick="dark()"><img border="0" alt="Toggle Dark Mode" src="{% static 'images/dark.jpg' %}"></button>
+  <script>
+    function dark() {
+      var element = document.body;
+      element.classList.toggle("dark-mode");
+    }
+  </script>
+  <p>
+    <img border="0" alt="GAME PLAN" src="{% static 'images/gp_logo.png' %}">
+  </p>
+  <label>Choose Your Location<label>
+    <select id="menu" name="links" size="1" onchange="window.location.href=this.value;">
+      {% for city in cities %}
+          <option value="{%url 'index-city' city %}">{{city}}</option>
+        {% endfor %}
+    </select>
+    <select id="the-id">
+        
+    </select>
+</body>
