@@ -4,15 +4,19 @@
 {% block content %}
 <h1>All Businesses</h1>
 {% if business_list %}
-<ul>
-{% for business in business_list %}
-<li>{{business.name}}
-    <p>{{ business.city }}</p>
-    <p><a href="{{ business.get_absolute_url }}">GO</a></p>
+<div class="list">
+    <ul class="list-group">
+        {% for i in business_list %}
+        <li class="list-group-item" data-bs-theme="dark">
+        <p><strong>{{ i.name }}</strong></p>
+        <p>{{i.address}}, {{i.city}}
+        </p>
+        <a class="btn btn-primary" href="{{ i.get_absolute_url }}" role="button">GO</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
 
-</li>
-{% endfor %}
-</ul>
 {% else %}
 <p>There are no businesses registered.</p>
 {% endif %}
