@@ -64,6 +64,10 @@
         height: 50px;
         width: 50px;
       }
+
+      .font_size{
+        font-size: large;
+      }
 </style>
 {% load bootstrap5 %}
 {% bootstrap_css %}
@@ -84,10 +88,10 @@
     </a>
 </div>
 
-<ul class="ul">
-    <li><a class="li li_a li_a_hover" href="{% url 'business' %}" >Business</a></li>
+<ul class="ul font_size">
+    <li><a class="li li_a li_a_hover" href="{% url 'business' %}" >Business List</a></li>
     <li><a class="li li_a li_a_hover" href="{% url 'create_business'%}">Create New Business</a></li>
-    <li><a class="li li_a li_a_hover" href="#contact">Contact</a></li>
+    <li><a class="li li_a li_a_hover" href="#contact">Change Location</a></li>
     <img onclick="dark()" class="access" alt="Dark Mode" src="{% static 'images/dark.jpg' %}"></button></li>
 </ul>
 

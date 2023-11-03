@@ -8,8 +8,8 @@
 <h2>Businesses in {{city}} area</h2>
 <ul class="list-group">
 {% for i in businesses_in_city %}
-<li class="list-group-item">
-<p><strong>{{ i.name }}</strong></p>
+<li class="list-group-item list_items">
+<h2><strong>{{ i.name }}</strong></h2>
 <p><strong>Currently:</strong>
     {%if i.is_open %}
      Open
@@ -17,7 +17,8 @@
      Closed
     {% endif %}
 </p>
-<a class="btn btn-primary" href="{{ i.get_absolute_url }}" role="button">View</a>
+<div class="buttons"><a class="btn btn-primary btn-lg" href="{{ i.get_absolute_url }}" role="button">View Business</a></div>
+
 </li>
 {% endfor %}
 </ul>

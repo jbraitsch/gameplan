@@ -4,13 +4,16 @@
 <h2>Delete Business</h2>
 
 
-<form method="POST">
-  {% csrf_token %}
-  <p>Are you sure that you want to delete the business "{{post.title}}"?</p>
-  <div>
-    <button class="btn btn-danger" type="submit">Yes, Delete</button>
-    <a class="btn btn-primary" href="{% url 'index' %}"role="button">Cancel </a>
-  </div>
-</form>
+<div class="font_size">
+  <form method="POST">
+    {% csrf_token %}
+    <p>Are you sure that you want to delete the business "{{post.title}}"?</p>
+    <div>
+      <button class="btn btn-danger" type="submit">Yes, Delete</button>
+      <a class="btn btn-primary" href="{% url 'index' %}"role="button">Cancel </a>
+    </div>
+  </form>
+</div>
+
 
 {% endblock content %}

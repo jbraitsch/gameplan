@@ -21,6 +21,16 @@
     .center {
       text-align:center;
     }
+
+    .access{
+      float: right;
+      height: 50px;
+      width: 50px;
+    }
+
+    .font_size{
+      font-size: large;
+    }
 </style>
 {% load bootstrap5 %}
 {% bootstrap_css %}
@@ -28,7 +38,8 @@
 </head>
 
 <body>
-  <button onclick="dark()"><img border="0" alt="Toggle Dark Mode" src="{% static 'images/dark.jpg' %}"></button>
+  <div class="font_size center">
+    <button class="access" onclick="dark()"><img border="0" alt="Toggle Dark Mode" src="{% static 'images/dark.jpg' %}"></button>
   <script>
     function dark() {
       var element = document.body;
@@ -38,10 +49,12 @@
   <p>
     <img class="img" border="0" alt="GAME PLAN" src="{% static 'images/gp_logo.png' %}">
   </p>
-  <label class="center">Choose Your Location<label>
+  <label class="center">Choose Your Location <label>
     <select id="menu" name="links" size="1" onchange="window.location.href=this.value;">
       {% for city in cities %}
           <option value="{%url 'index_city' city %}">{{city}}</option>
       {% endfor %}
     </select>
+  </div>
+  
 </body>

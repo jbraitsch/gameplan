@@ -2,15 +2,17 @@
 
 {% block content %}
 <h1>{{ business.name }}</h1>
-<p><strong>Email:</strong> {{ business.email }}</p>
-<p><strong>Currently:</strong>
+<div class="font_size">
+    <p><strong>Email:</strong> {{ business.email }}</p>
+    <p><strong>Currently:</strong>
 {%if business.is_open %}
  Open
 {%else%}
  Closed
-{% endif %}</p>
-<p><strong>Location: {{business.address}}, {{business.city}}</strong></p>
-<p><strong>About: </strong>{{business.about}}</p>
-<a class="btn btn-success" href="{% url 'update_business' business.id %}" role="button">Update</a>
-<a class="btn btn-danger" href="{% url 'delete_business' business.id %}" role="button">Delete</a>
+{% endif %}
+    <p><strong>Location: {{business.address}}, {{business.city}}</strong></p>
+    <p><strong>About: </strong>{{business.about}}</p>
+</div>
+<a class="btn btn-primary btn-lg" href="{% url 'update_business' business.id %}" role="button">Update</a>
+<a class="btn btn-dark btn-lg" href="{% url 'delete_business' business.id %}" role="button">Delete</a>
 {% endblock %}
