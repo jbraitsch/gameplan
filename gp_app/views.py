@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views import generic
-from .models import Business
+from .models import Business, NHLTeam
 from .forms import BusinessForm
 from django.contrib import messages
 
@@ -31,7 +31,7 @@ def deleteBusiness(request, business_id):
         return render(request, 'gp_app/business_delete.html',context)       
     elif request.method == 'POST':
         business.delete()
-        return redirect('index')
+        return redirect('index_city', business.city)
     
 def createBusiness(request):
     form = BusinessForm()
@@ -50,7 +50,7 @@ def createBusiness(request):
             business.save()
 
             # Redirect back to the portfolio detail page
-            return redirect('index')
+            return redirect('business-detail', business.id)
 
     context = {'form': form}
     return render(request, 'gp_app/business_form.html', context)
@@ -70,3 +70,16 @@ def updateBusiness(request, business_id):
     else:
         context = {'form': form}
         return render(request, 'gp_app/business_form.html', context) 
+
+
+def listNHLTeams(request):
+    teams = NHLTeam.objects.all()
+    context = {'teams': teams}
+    return render(request, 'gp_app/nhl_teams_list.html', context)
+
+
+def NHLTeamDetails(request, team_id):
+    team = NHLTeam.objects.get(id=team_id)
+    abbrev = team.get_team_abbrev()
+    schedule = team.get_week_schedule(abbrev)
+    return render(request, 'gp_app/nhl_team_detail.html', {"schedule":schedule})

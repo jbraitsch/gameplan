@@ -9,9 +9,12 @@ urlpatterns = [
 # example in html <a href="{% url 'index' %}">Home</a>.
     path('', views.index, name='index'),
     path('business/', views.BusinessListView.as_view(), name= 'business'),
+    path('nhl/', views.listNHLTeams, name='nhl_teams_list'),
+    path('nhl/<int:team_id>', views.NHLTeamDetails, name="nhl_team_details"),
     path('<str:city>/', views.indexCity, name='index_city'),
     path('business/<int:pk>', views.BusinessDetailView.as_view(), name='business-detail'),
     path('business/create_business/', views.createBusiness, name='create_business'),
     path('business/<int:business_id>/delete_business/',views.deleteBusiness, name='delete_business' ),
     path('business/<int:business_id>/update_business/', views.updateBusiness, name='update_business' ),
+    
     ]

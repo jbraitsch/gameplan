@@ -1,0 +1,18 @@
+<!-- inherit from base.html -->
+{% extends 'gp_app/base_template.html' %}
+
+{%block content%}
+
+<h2>NHL TEAMS</h2>
+<div class="list font_size">
+    <ul class="list-group">
+        {% for i in teams %}
+        <li class="list-group-item" data-bs-theme="dark">
+        <p><strong>{{ i.name }}</strong></p>
+        <a class="btn btn-primary btn-lg" href="{{i.get_absolute_url}}" role="button">View {{i.name}}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}

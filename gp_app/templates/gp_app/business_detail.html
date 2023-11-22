@@ -3,7 +3,7 @@
 {% block content %}
 <h1>{{ business.name }}</h1>
 <div class="font_size">
-    <p><strong>Email:</strong> {{ business.email }}</p>
+    <p><strong>Phone:</strong> {{ business.phone_number }}</p>
     <p><strong>Currently:</strong>
 {%if business.is_open %}
  Open
@@ -13,6 +13,6 @@
     <p><strong>Location: {{business.address}}, {{business.city}}</strong></p>
     <p><strong>About: </strong>{{business.about}}</p>
 </div>
-<a class="btn btn-primary btn-lg" href="{% url 'update_business' business.id %}" role="button">Update</a>
-<a class="btn btn-dark btn-lg" href="{% url 'delete_business' business.id %}" role="button">Delete</a>
+<a class="btn btn-success btn-lg" href="{% url 'update_business' business.id %}" role="button">Update</a>
+<a class="btn btn-primary btn-lg" href="{% url 'delete_business' business.id %}" role="button">Delete</a>
 {% endblock %}

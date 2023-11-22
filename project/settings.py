@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'gp_app',
     'bootstrap5',
-    'accessibility',
 ]
 
 # Add support for authenticating users
@@ -71,7 +70,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'accessibility.context_processors.admin_AIOA',
             ],
         },
     },

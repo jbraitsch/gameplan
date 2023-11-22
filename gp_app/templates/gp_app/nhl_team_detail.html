@@ -1,0 +1,17 @@
+<!-- inherit from base.html -->
+{% extends 'gp_app/base_template.html' %}
+
+{%block content%}
+
+<h1>{{team.name}}</h1>
+<div class="list font_size">
+    <ul class="list-group">
+        {% for game in schedule %}
+        <li class="list-group-item" data-bs-theme="dark">
+        <p><strong>{{ game.away }} @ {{game.home}}</strong></p>
+        <p>{{game.month}}/{{game.day}}/{{game.year}} @ {{game.hour}}:{{game.minute}} {{game.time_of_day}} MST</p>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

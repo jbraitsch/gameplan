@@ -10,7 +10,7 @@
     <p>Are you sure that you want to delete the business "{{post.title}}"?</p>
     <div>
       <button class="btn btn-danger" type="submit">Yes, Delete</button>
-      <a class="btn btn-primary" href="{% url 'index' %}"role="button">Cancel </a>
+      <a class="btn btn-primary" href="{% url 'business-detail' business.id %}"role="button">Cancel </a>
     </div>
   </form>
 </div>
