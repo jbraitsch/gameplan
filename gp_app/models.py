@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django import forms
+from django.contrib.auth.models import AbstractBaseUser
 import requests
 
 CITIES = (
@@ -34,12 +35,14 @@ class Business(models.Model):
     phone_number = models.CharField("Phone", max_length=10)
     is_open = models.BooleanField("Open", default=True, blank=True)
     about = models.TextField(blank=True)
+    #password = models.CharField("", max_length=50)
 
     def __str__(self):
         return self.name
     
     def get_absolute_url(self):
         return reverse('business-detail', args=[str(self.id)])
+    
     
 class NHLTeam(models.Model):
     TEAMS = (('Montréal Canadiens', 'Montréal Canadiens'), ('Toronto Maple Leafs', 'Toronto Maple Leafs'), 
@@ -113,5 +116,14 @@ class NHLTeam(models.Model):
             game = {"away":away, "home":home, "year":year, "month":month, "day":day, "hour":hour, "minute":minute, "time_of_day": time_of_day}
             games.append(game)
         return games
+    
+
+class User(AbstractBaseUser):
+    username = models.CharField("Username", max_length=50)
+    USERNAME_FIELD = "username"
+    password = models.CharField("Password", max_length=200, default=None)
+    email = models.CharField("Email", max_length=50)
+    fav_team = models.ForeignKey(NHLTeam, on_delete=models.SET_DEFAULT, default = None, blank=True)
+    fav_biz = models.ForeignKey(Business, on_delete=models.SET_DEFAULT, default = None, blank=True)
     
 

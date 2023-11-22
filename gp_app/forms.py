@@ -1,14 +1,15 @@
 from django.forms import ModelForm
-from .models import Business #, Project
+from .models import Business
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import User
 
-"""
-#create class for project form
-class ProjectForm(ModelForm):
-    class Meta:
-        model = Project
-        fields =('title', 'description')
-"""
+
 class BusinessForm(ModelForm):
     class Meta:
         model = Business
         fields = ('name', 'is_open','email', 'address', 'city', 'phone_number', 'about')
+
+class CreateUserForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']

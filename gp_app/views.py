@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views import generic
 from .models import Business, NHLTeam
-from .forms import BusinessForm
+from .forms import BusinessForm, CreateUserForm
+from django.contrib.auth.models import Group, User
 from django.contrib import messages
 
 # Create your views here.
@@ -83,3 +84,19 @@ def NHLTeamDetails(request, team_id):
     abbrev = team.get_team_abbrev()
     schedule = team.get_week_schedule(abbrev)
     return render(request, 'gp_app/nhl_team_detail.html', {"schedule":schedule})
+
+def registerPage(request):
+    form = CreateUserForm()
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            username = form.cleaned_data.get('username')
+            group = Group.objects.get_or_create(name='user')
+            (gtype, btype) = group
+            user.groups.add(gtype.id)
+            user.save()
+            messages.success(request, 'Account was created for ' + username)
+            return redirect('login')
+    context = {'form': form}
+    return render(request, 'registration/register.html', context)
