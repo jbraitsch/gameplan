@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views import generic
-from .models import Business, NHLTeam
-from .forms import BusinessForm, CreateUserForm
+from .models import Business, NHLTeam, AppUser
+from .forms import BusinessForm, CreateUserForm, UserForm
 from django.contrib.auth.models import Group, User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -27,6 +27,12 @@ class BusinessListView(generic.ListView):
 
 class BusinessDetailView(LoginRequiredMixin, generic.DetailView):
     model = Business
+
+class UserDetailView(generic.DetailView):
+    model = AppUser
+
+class UserView(LoginRequiredMixin, generic.DetailView):
+    model = User
 
 def deleteBusiness(request, business_id):
     business = Business.objects.get(id=business_id)
@@ -97,7 +103,7 @@ def registerPage(request):
         if form.is_valid():
             user = form.save()
             username = form.cleaned_data.get('username')
-            group = Group.objects.get_or_create(name='user')
+            group = Group.objects.get_or_create(name='business_role')
             (gtype, btype) = group
             user.groups.add(gtype.id)
             user.save()
@@ -105,5 +111,20 @@ def registerPage(request):
             return redirect('login')
     context = {'form': form}
     return render(request, 'registration/register.html', context)
+
+def userPage(request, user_id):
+    app_user = User.objects.get(id=user_id)
+    form = UserForm()
+    if request.method == 'POST':
+            user_data = request.POST.copy()
+            form = UserForm(user_data)
+            if form.is_valid():
+                appuser = form.save(commit=False)
+                appuser.user = app_user
+                return redirect('user_detail')
+    context = {'form': form, 'app_user':app_user}
+    return render(request, 'gp_app/user_form.html', context)
+
+
 
 

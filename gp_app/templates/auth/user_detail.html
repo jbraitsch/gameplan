@@ -1,0 +1,12 @@
+{% extends 'gp_app/base_template.html' %}
+
+{% block content %}
+<h2 class = "center">Hello {{ user.username }}</h2>
+<div class="font_size">
+    <p><strong>Email: {{user.email}}</p>
+    <p>Password Hash: </p>
+    <p>{{user.password}}</p>
+</div>
+<a class="btn btn-success btn-lg" href="{% url 'business' %}" role="button">Update</a>
+<a class="btn btn-primary btn-lg" href="{% url 'business' %}" role="button">Delete</a>
+{% endblock %}

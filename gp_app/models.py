@@ -82,6 +82,7 @@ class NHLTeam(models.Model):
             games.append(game)
         return games
 
+
 class Business(models.Model):
     ACTIVE = ((True,'True'), (False,'False'))
     name = models.CharField("Name", max_length=200)
@@ -91,7 +92,7 @@ class Business(models.Model):
     phone_number = models.CharField("Phone", max_length=10)
     is_open = models.BooleanField("Open", default=True, blank=True)
     about = models.TextField(blank=True)
-    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE, unique=True)
+    
     
     def __str__(self):
         return self.name
@@ -99,14 +100,24 @@ class Business(models.Model):
     def get_absolute_url(self):
         return reverse('business-detail', args=[str(self.id)])
     
+class AppUser(models.Model):
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE, unique=True)
+    business = models.ForeignKey(Business, verbose_name=("Favorite Business"), on_delete=models.SET_DEFAULT, default = None, blank=True)
+    team = models.ForeignKey(NHLTeam, verbose_name=("Favorite Team"), on_delete=models.SET_DEFAULT, default = None, blank=True)
+    is_biz = models.BooleanField("Business", default=False, blank=True)
+    city = city = models.CharField("Location", choices=CITIES, default=None, max_length=200)
+    is_setup = False
+
+    def __str__(self):
+        return self.name
+    
+    def get_absolute_url(self):
+        return reverse('', args=[str(self.id)])
+    
 '''
 class User(AbstractBaseUser):
     username = models.CharField("Username", max_length=50)
     USERNAME_FIELD = "username"
     password = models.CharField("Password", max_length=200, default=None)
     email = models.CharField("Email", max_length=50)
-    team = models.ForeignKey(NHLTeam, verbose_name=("Favorite Team"), on_delete=models.SET_DEFAULT, default = None, blank=True)
-    is_biz = models.BooleanField("Business", default=False, blank=True)
-    business = models.ForeignKey(Business, verbose_name=("Favorite Business"), on_delete=models.SET_DEFAULT, default = None, blank=True)
-    city = city = models.CharField("Location", choices=CITIES, default=None, max_length=200)
 '''
