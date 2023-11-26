@@ -3,15 +3,18 @@
 
 {%block content%}
 
-<h1>{{team.name}}</h1>
-<div class="list font_size">
-    <ul class="list-group">
+<div class="center">
+    <h1>{{team.name}}</h1>
+    <h2>This week's schedule</h2>
+    <div class="list font_size">
+        <ul class="list-group">
         {% for game in schedule %}
         <li class="list-group-item" data-bs-theme="dark">
         <p><strong>{{ game.away }} @ {{game.home}}</strong></p>
         <p>{{game.month}}/{{game.day}}/{{game.year}} @ {{game.hour}}:{{game.minute}} {{game.time_of_day}} MST</p>
         </li>
         {% endfor %}
-    </ul>
+        </ul>
+    </div>
 </div>
 {% endblock %}

@@ -49,12 +49,18 @@
   <p>
     <img class="img" border="0" alt="GAME PLAN" src="{% static 'images/gp_logo.png' %}">
   </p>
-  <label class="center">Choose Your Location <label>
+  <label class="center">Choose Your Location </label>
     <select id="menu" name="links" size="1" onchange="window.location.href=this.value;">
       {% for city in cities %}
           <option value="{%url 'index_city' city %}">{{city}}</option>
       {% endfor %}
     </select>
+    {% if request.user.is_authenticated %}
+        <p><a href="{%url 'index'%}">{{user.username}}</a></p>
+        <p><a href="{% url 'logout' %}">Logout</a> </p>
+    {% else %}
+        <p><a href="{% url 'login'%}">User Login/Register</a></p>
+    {% endif %}
   </div>
   
 </body>

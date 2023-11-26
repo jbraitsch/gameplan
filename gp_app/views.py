@@ -5,6 +5,9 @@ from .models import Business, NHLTeam
 from .forms import BusinessForm, CreateUserForm
 from django.contrib.auth.models import Group, User
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from .decorators import allowed_users
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 def indexCity(request, city):
@@ -22,7 +25,7 @@ def index(request):
 class BusinessListView(generic.ListView):
     model = Business
 
-class BusinessDetailView(generic.DetailView):
+class BusinessDetailView(LoginRequiredMixin, generic.DetailView):
     model = Business
 
 def deleteBusiness(request, business_id):
@@ -33,7 +36,9 @@ def deleteBusiness(request, business_id):
     elif request.method == 'POST':
         business.delete()
         return redirect('index_city', business.city)
-    
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['business_role'])    
 def createBusiness(request):
     form = BusinessForm()
     #business = Business.objects.get(pk=business_id)
@@ -83,7 +88,7 @@ def NHLTeamDetails(request, team_id):
     team = NHLTeam.objects.get(id=team_id)
     abbrev = team.get_team_abbrev()
     schedule = team.get_week_schedule(abbrev)
-    return render(request, 'gp_app/nhl_team_detail.html', {"schedule":schedule})
+    return render(request, 'gp_app/nhl_team_detail.html', {"schedule":schedule, "team":team})
 
 def registerPage(request):
     form = CreateUserForm()
@@ -100,3 +105,5 @@ def registerPage(request):
             return redirect('login')
     context = {'form': form}
     return render(request, 'registration/register.html', context)
+
+

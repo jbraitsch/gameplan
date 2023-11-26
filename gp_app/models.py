@@ -1,48 +1,13 @@
 from django.db import models
 from django.urls import reverse
 from django import forms
-from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import User
 import requests
 
 CITIES = (
     ('Colorado Springs', 'Colorado Springs'),
     ('Denver', 'Denver'),
     ('Fort Collins', 'Fort Collins'))
-'''
-class City(models.Model):
-    CITIES = (
-    ('Colorado Springs', 'Colorado Springs'),
-    ('Denver', 'Denver'),
-    ('Fort Collins', 'Fort Collins'))
-    name = models.CharField(choices=CITIES, max_length=50)
-
-    def __str__(self):
-        return self.name
-    
-    def get_absolute_url(self):
-        return reverse("index-city", args=[str(self.__str__)])
-    
-'''
-
-
-class Business(models.Model):
-    ACTIVE = ((True,'True'), (False,'False'))
-    name = models.CharField("Name", max_length=200)
-    email = models.CharField("Email", max_length=200)
-    #city = models.ForeignKey(City, on_delete=models.CASCADE, default=None)
-    city = models.CharField("Location", choices=CITIES, max_length=200)
-    address = models.CharField("Address", max_length=200)
-    phone_number = models.CharField("Phone", max_length=10)
-    is_open = models.BooleanField("Open", default=True, blank=True)
-    about = models.TextField(blank=True)
-    #password = models.CharField("", max_length=50)
-
-    def __str__(self):
-        return self.name
-    
-    def get_absolute_url(self):
-        return reverse('business-detail', args=[str(self.id)])
-    
     
 class NHLTeam(models.Model):
     TEAMS = (('Montréal Canadiens', 'Montréal Canadiens'), ('Toronto Maple Leafs', 'Toronto Maple Leafs'), 
@@ -116,14 +81,32 @@ class NHLTeam(models.Model):
             game = {"away":away, "home":home, "year":year, "month":month, "day":day, "hour":hour, "minute":minute, "time_of_day": time_of_day}
             games.append(game)
         return games
-    
 
+class Business(models.Model):
+    ACTIVE = ((True,'True'), (False,'False'))
+    name = models.CharField("Name", max_length=200)
+    email = models.CharField("Email", max_length=200)
+    city = models.CharField("Location", choices=CITIES, max_length=200)
+    address = models.CharField("Address", max_length=200)
+    phone_number = models.CharField("Phone", max_length=10)
+    is_open = models.BooleanField("Open", default=True, blank=True)
+    about = models.TextField(blank=True)
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE, unique=True)
+    
+    def __str__(self):
+        return self.name
+    
+    def get_absolute_url(self):
+        return reverse('business-detail', args=[str(self.id)])
+    
+'''
 class User(AbstractBaseUser):
     username = models.CharField("Username", max_length=50)
     USERNAME_FIELD = "username"
     password = models.CharField("Password", max_length=200, default=None)
     email = models.CharField("Email", max_length=50)
-    fav_team = models.ForeignKey(NHLTeam, on_delete=models.SET_DEFAULT, default = None, blank=True)
-    fav_biz = models.ForeignKey(Business, on_delete=models.SET_DEFAULT, default = None, blank=True)
-    
-
+    team = models.ForeignKey(NHLTeam, verbose_name=("Favorite Team"), on_delete=models.SET_DEFAULT, default = None, blank=True)
+    is_biz = models.BooleanField("Business", default=False, blank=True)
+    business = models.ForeignKey(Business, verbose_name=("Favorite Business"), on_delete=models.SET_DEFAULT, default = None, blank=True)
+    city = city = models.CharField("Location", choices=CITIES, default=None, max_length=200)
+'''
