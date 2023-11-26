@@ -8,7 +8,7 @@ def allowed_users(allowed_roles=[]):
             groups=None
             if request.user.groups.exists():
                 groups = request.user.groups.all()
-            for group in groups: 
+                for group in groups: 
                     if str(group) in allowed_roles:
                         return view_func(request, *args, **kwargs)
             else:

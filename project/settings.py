@@ -16,10 +16,6 @@ from django.contrib import auth
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# URL redirect after logout
-LOGIN_REDIRECT_URL = "{% url 'business' %}"
-LOGOUT_REDIRECT_URL = "business"
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -44,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'gp_app',
     'bootstrap5',
+    'selenium',
 ]
 
 # Add support for authenticating users
@@ -136,4 +133,5 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = "business"
+LOGOUT_REDIRECT_URL = "login"
