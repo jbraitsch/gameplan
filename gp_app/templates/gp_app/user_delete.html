@@ -1,16 +1,16 @@
 {% extends 'gp_app/base_template.html' %} 
 
 {% block content %}
-<h2>Delete Business</h2>
+<h2>Delete User</h2>
 
 
 <div class="font_size">
   <form method="POST">
     {% csrf_token %}
-    <p>Are you sure that you want to delete the business "{{business.name}}"?</p>
+    <p>Are you sure that you want to leave us {{user.username}}?</p>
     <div>
       <button class="btn btn-danger" type="submit">Yes, Delete</button>
-      <a class="btn btn-primary" href="{% url 'business-detail' business.id %}"role="button">Cancel </a>
+      <a class="btn btn-primary" href="{% url 'login'%}"role="button">Cancel </a>
     </div>
   </form>
 </div>

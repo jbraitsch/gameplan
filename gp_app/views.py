@@ -25,15 +25,17 @@ def index(request):
 class BusinessListView(generic.ListView):
     model = Business
 
-class BusinessDetailView(LoginRequiredMixin, generic.DetailView):
+class BusinessDetailView(generic.DetailView):
     model = Business
 
-class UserDetailView(generic.DetailView):
-    model = AppUser
+#class UserDetailView(generic.DetailView):
+ #   model = AppUser
 
 class UserView(LoginRequiredMixin, generic.DetailView):
     model = User
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['business_role']) 
 def deleteBusiness(request, business_id):
     business = Business.objects.get(id=business_id)
     context = {'business': business}
@@ -67,6 +69,8 @@ def createBusiness(request):
     context = {'form': form}
     return render(request, 'gp_app/business_form.html', context)
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['business_role']) 
 def updateBusiness(request, business_id):
     business = Business.objects.get(id=business_id)
     #student = Customer.objects.get(portfolio_id=portfolio_id)
@@ -112,6 +116,15 @@ def registerPage(request):
     context = {'form': form}
     return render(request, 'registration/register.html', context)
 
+def deleteUser(request, user_id):
+    user = request.user
+    context = {'user': user}
+    if request.method == 'GET':
+        return render(request, 'gp_app/user_delete.html',context)       
+    elif request.method == 'POST':
+        user.delete()
+        return redirect('login')
+    
 def userPage(request, user_id):
     app_user = User.objects.get(id=user_id)
     form = UserForm()

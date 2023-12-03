@@ -84,7 +84,6 @@ class NHLTeam(models.Model):
 
 
 class Business(models.Model):
-    ACTIVE = ((True,'True'), (False,'False'))
     name = models.CharField("Name", max_length=200)
     email = models.CharField("Email", max_length=200)
     city = models.CharField("Location", choices=CITIES, max_length=200)
@@ -113,11 +112,4 @@ class AppUser(models.Model):
     
     def get_absolute_url(self):
         return reverse('', args=[str(self.id)])
-    
-'''
-class User(AbstractBaseUser):
-    username = models.CharField("Username", max_length=50)
-    USERNAME_FIELD = "username"
-    password = models.CharField("Password", max_length=200, default=None)
-    email = models.CharField("Email", max_length=50)
-'''
+

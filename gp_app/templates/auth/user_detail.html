@@ -7,6 +7,7 @@
     <p>Password Hash: </p>
     <p>{{user.password}}</p>
 </div>
+<p> </p>
 <a class="btn btn-success btn-lg" href="{% url 'business' %}" role="button">Update</a>
-<a class="btn btn-primary btn-lg" href="{% url 'business' %}" role="button">Delete</a>
+<a class="btn btn-primary btn-lg" href="{% url 'user_delete' user.id %}" role="button">Delete</a>
 {% endblock %}

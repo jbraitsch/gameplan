@@ -19,7 +19,7 @@ class HomepageTests(SimpleTestCase):
 
     def test_template_content(self):
         response = self.client.get(reverse("index"))
-        self.assertContains(response, "<h2>Wher to Watch</h2>")
+        self.assertContains(response, "<h3>Where to Watch</h3>")
         self.assertNotContains(response, "Not on the page")
 
 #tests that model db queries for the NHLTeams class
@@ -39,7 +39,7 @@ class NHLTeamTests(TestCase):
         response = self.client.get(reverse("index"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "gp_app/index.html")
-        self.assertContains(response, "<h2>Wher to Watch</h2>")
+        self.assertContains(response, "<h3>Where to Watch</h3>")
 
 class BusinessTests(TestCase):
     @classmethod

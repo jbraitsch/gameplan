@@ -1,13 +1,5 @@
 import requests
 
-def get_books(year, author):
-    url = 'http://api.example.com/books' 
-    params = {'year': year, 'author': author}
-    r = requests.get(url, params=params)
-    books = r.json()
-    books_list = {'books':books['results']}
-    return books_list
-
 def get_teams_list():
     url = "https://records.nhl.com/site/api/franchise"
     r = requests.get(url)

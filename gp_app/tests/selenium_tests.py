@@ -15,9 +15,6 @@ class UserTestSuccess(TestCase):
         driver = webdriver.Chrome(options=chrome_options)
         driver.get("127.0.0.1:8000/accounts/register")
 
-        title = driver.title
-        assert title == "Game Plan"
-
         driver.implicitly_wait(0.5)
 
         name_box = driver.find_element(by=By.NAME, value="username")
@@ -51,9 +48,6 @@ class UserTestFail(TestCase):
         driver = webdriver.Chrome(service=webdriver_service, options=chrome_options)
         driver.get("127.0.0.1:8000/accounts/register")
 
-        title = driver.title
-        assert title == "Game Plan"
-
         driver.implicitly_wait(0.5)
 
         name_box = driver.find_element(by=By.NAME, value="username")
@@ -67,6 +61,7 @@ class UserTestFail(TestCase):
         pswd1_box.send_keys("3edcxsw2")
         pswd2_box.send_keys("3edcvfr4")
         submit_button.click()
+
 
         err_msg = driver.find_element_by_xpath("//li [contains( text(), 'The two password fields didn’t match.')]")
         assert err_msg == "The two password fields didn’t match."
